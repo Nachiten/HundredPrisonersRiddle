@@ -1,5 +1,6 @@
 import random
 
+# Print list with spacing so that they align correctly on the console
 def printList(_list):
     for i in range(100):
         value = _list[i]
@@ -12,6 +13,7 @@ def printList(_list):
 totalWonAmount = 0
 totalLostAmount = 0
 
+# Select how many runs with this number
 for runs in range(5000):
 
     # 100 boxes
@@ -30,22 +32,29 @@ for runs in range(5000):
     for playerNumber in range(1, 101):
         # print(f"Player {playerNumber} turn")
         boxNumber = playerNumber - 1
+        # Each prisoner gets 50 tries to find his number
         for tries in range(50):
             # print(f"Searching box: {boxNumber + 1}")
             numberFound = boxes[boxNumber]
+
+            # If the number is found, then this prisoner already won
             if numberFound == playerNumber:
                 peopleWon[playerNumber - 1] = True
                 # print(f'Person {playerNumber} found his number on box {boxNumber}')
                 break
+
+            # If the number is not found, then go look for the box with this number on it
             boxNumber = numberFound - 1
 
         # print(f'Person {playerNumber} could not find his number')
 
+    # Count how many people won and lost
     # foundCount = sum(1 for value in peopleWon if value)
     # notFoundCount = sum(1 for value in peopleWon if not value)
     # print(f'\n{foundCount} DID found their number')
     # print(f'{notFoundCount} DID NOT find their number')
 
+    # Only if everyone won, this run is won
     if all(peopleWon):
         totalWonAmount += 1
     else:
